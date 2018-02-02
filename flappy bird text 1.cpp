@@ -1,29 +1,29 @@
-//½áºÏeasyx×öµÄflappy birdĞ¡ÓÎÏ·//
-//ÓÉÓÚÍ¼Æ¬ËØ²Ä²»×ã£¬×î¶àÖ»ÄÜ¼ÍÂ¼9·Ö//
-//¿ª·¢Ê±¼ä2018Äê1ÔÂ10ÈÕ//
-//¿ª·¢ÈË£ºlionlsc//
-//ËùÓĞÍ¼Æ¬¼°ÒôÀÖËØ²Ä¾ùÀ´×ÔÍøÂç//
-//¿ª·¢¹¤¾ß vc6.0//
+//ç»“åˆeasyxåšçš„flappy birdå°æ¸¸æˆ//
+//ç”±äºå›¾ç‰‡ç´ æä¸è¶³ï¼Œæœ€å¤šåªèƒ½çºªå½•9åˆ†//
+//å¼€å‘æ—¶é—´2018å¹´1æœˆ10æ—¥//
+//å¼€å‘äººï¼šlionlsc//
+//æ‰€æœ‰å›¾ç‰‡åŠéŸ³ä¹ç´ æå‡æ¥è‡ªç½‘ç»œ//
+//å¼€å‘å·¥å…· vc6.0//
 //Do not use it for commercial use//
 #include<stdio.h>
 #include<graphics.h>
-#include<conio.h>                   //·Ç»º³åÊäÈë//
+#include<conio.h>                   //éç¼“å†²è¾“å…¥//
 #include<windows.h>
 #include<stdlib.h>
 #include<time.h>
-#pragma comment(lib,"Winmm.lib")  //Á¬½ÓWinmm.lib¿âº¯Êı£¬ÓÃÓÚÒôÀÖµÄ²¥·Å//
+#pragma comment(lib,"Winmm.lib")  //è¿æ¥Winmm.libåº“å‡½æ•°ï¼Œç”¨äºéŸ³ä¹çš„æ’­æ”¾//
 int birdx,birdy,barrierdown,barriertop,barrierx,count,flag;
 IMAGE bkphoto,bird1,bird2,barrierover1,barrierover2,barrierdown1,barrierdown2;
 IMAGE score01,score02,score11,score12,score21,score22,score31,score32,score41,score42,score51,score52,score61,score62;
 IMAGE score71,score72,score81,score82,score91,score92;
 IMAGE birdfail1,birdfail2;
-IMAGE gameover1,gameover2;            //¶¨ÒåÍ¼Æ¬//
+IMAGE gameover1,gameover2;            //å®šä¹‰å›¾ç‰‡//
 int temp;
-void startup()                        //ÉèÖÃ²ÎÊı//
+void startup()                        //è®¾ç½®å‚æ•°//
 {
-	initgraph(350,600);               //¶¨ÒåÓÎÏ·½çÃæ´óĞ¡//
-    HWND hwnd = GetHWnd();
-    SetWindowText(hwnd, "lionlscÖÆ×÷");
+	initgraph(350,600);               //å®šä¹‰æ¸¸æˆç•Œé¢å¤§å°//
+        HWND hwnd = GetHWnd();
+        SetWindowText(hwnd, "lionlscåˆ¶ä½œ");
 	flag=0;
 	count=0;
 	birdx=50;
@@ -33,44 +33,44 @@ void startup()                        //ÉèÖÃ²ÎÊı//
 	barriertop=340;
 	loadimage(&bkphoto,"D:\\flappybird\\background.jpg"); 
 	loadimage(&bird1,"D:\\flappybird\\bird1-2.jpg");
-    loadimage(&bird2,"D:\\flappybird\\bird1-1.jpg");
+        loadimage(&bird2,"D:\\flappybird\\bird1-1.jpg");
 	loadimage(&barrierover1,"D:\\flappybird\\stone_up1.jpg");
 	loadimage(&barrierover2,"D:\\flappybird\\stone_up2.jpg");
 	loadimage(&barrierdown1,"D:\\flappybird\\stone_down1.jpg");
-    loadimage(&barrierdown2,"D:\\flappybird\\stone_down2.jpg");
+        loadimage(&barrierdown2,"D:\\flappybird\\stone_down2.jpg");
 	loadimage(&score01,"D:\\flappybird\\0_1.jpg");
-    loadimage(&score02,"D:\\flappybird\\0_2.jpg");
+        loadimage(&score02,"D:\\flappybird\\0_2.jpg");
 	loadimage(&score11,"D:\\flappybird\\1_1.jpg");
-    loadimage(&score12,"D:\\flappybird\\1_2.jpg");
-    loadimage(&score21,"D:\\flappybird\\2_1.jpg");
-    loadimage(&score22,"D:\\flappybird\\2_2.jpg");
-    loadimage(&score31,"D:\\flappybird\\3_1.jpg");
-    loadimage(&score32,"D:\\flappybird\\3_2.jpg");
-    loadimage(&score41,"D:\\flappybird\\4_1.jpg");
-    loadimage(&score42,"D:\\flappybird\\4_2.jpg");
-    loadimage(&score51,"D:\\flappybird\\5_1.jpg");
-    loadimage(&score52,"D:\\flappybird\\5_2.jpg");
-    loadimage(&score61,"D:\\flappybird\\6_1.jpg");
-    loadimage(&score62,"D:\\flappybird\\6_2.jpg");
-    loadimage(&score71,"D:\\flappybird\\7_1.jpg");
-    loadimage(&score72,"D:\\flappybird\\7_2.jpg");
-    loadimage(&score81,"D:\\flappybird\\8_1.jpg");
-    loadimage(&score82,"D:\\flappybird\\8_2.jpg");
-    loadimage(&score91,"D:\\flappybird\\9_1.jpg");
-    loadimage(&score92,"D:\\flappybird\\9_2.jpg");
-    loadimage(&birdfail1,"D:\\flappybird\\bird4-1.jpg");
-    loadimage(&birdfail2,"D:\\flappybird\\bird4-2.jpg");
-    loadimage(&gameover1,"D:\\flappybird\\gameover1.jpg");
-    loadimage(&gameover2,"D:\\flappybird\\gameover2.jpg");
-	BeginBatchDraw();           //ÓÃÓÚÅúÁ¿»æÍ¼//
+        loadimage(&score12,"D:\\flappybird\\1_2.jpg");
+        loadimage(&score21,"D:\\flappybird\\2_1.jpg");
+        loadimage(&score22,"D:\\flappybird\\2_2.jpg");
+        loadimage(&score31,"D:\\flappybird\\3_1.jpg");
+        loadimage(&score32,"D:\\flappybird\\3_2.jpg");
+        loadimage(&score41,"D:\\flappybird\\4_1.jpg");
+        loadimage(&score42,"D:\\flappybird\\4_2.jpg");
+        loadimage(&score51,"D:\\flappybird\\5_1.jpg");
+        loadimage(&score52,"D:\\flappybird\\5_2.jpg");
+        loadimage(&score61,"D:\\flappybird\\6_1.jpg");
+        loadimage(&score62,"D:\\flappybird\\6_2.jpg");
+        loadimage(&score71,"D:\\flappybird\\7_1.jpg");
+        loadimage(&score72,"D:\\flappybird\\7_2.jpg");
+        loadimage(&score81,"D:\\flappybird\\8_1.jpg");
+        loadimage(&score82,"D:\\flappybird\\8_2.jpg");
+        loadimage(&score91,"D:\\flappybird\\9_1.jpg");
+        loadimage(&score92,"D:\\flappybird\\9_2.jpg");
+        loadimage(&birdfail1,"D:\\flappybird\\bird4-1.jpg");
+        loadimage(&birdfail2,"D:\\flappybird\\bird4-2.jpg");
+        loadimage(&gameover1,"D:\\flappybird\\gameover1.jpg");
+        loadimage(&gameover2,"D:\\flappybird\\gameover2.jpg");
+	BeginBatchDraw();           //ç”¨äºæ‰¹é‡ç»˜å›¾//
 }
-void show()                     //ÏÔÊ¾Í¼Æ¬//
+void show()                     //æ˜¾ç¤ºå›¾ç‰‡//
 {
-	putimage(0,0,&bkphoto);
-    putimage(barrierx,barrierdown,&barrierover2,NOTSRCERASE);
-    putimage(barrierx,barrierdown,&barrierover1,SRCINVERT);
-    putimage(barrierx,barriertop,&barrierdown2,NOTSRCERASE);
-    putimage(barrierx,barriertop,&barrierdown1,SRCINVERT);
+        putimage(0,0,&bkphoto);
+        putimage(barrierx,barrierdown,&barrierover2,NOTSRCERASE);
+        putimage(barrierx,barrierdown,&barrierover1,SRCINVERT);
+        putimage(barrierx,barriertop,&barrierdown2,NOTSRCERASE);
+        putimage(barrierx,barriertop,&barrierdown1,SRCINVERT);
 	if(count==0)
 	{
  	  putimage(300,100,&score01,NOTSRCERASE);
@@ -78,68 +78,68 @@ void show()                     //ÏÔÊ¾Í¼Æ¬//
 	}
 	if(count==1)
 	{
-      putimage(300,100,&score11,NOTSRCERASE);
+          putimage(300,100,&score11,NOTSRCERASE);
 	  putimage(300,100,&score12,SRCINVERT);
 	}
 	if(count==2)
 	{
-      putimage(300,100,&score21,NOTSRCERASE);
+          putimage(300,100,&score21,NOTSRCERASE);
 	  putimage(300,100,&score22,SRCINVERT);
 	}
-    if(count==3)
+        if(count==3)
 	{
-      putimage(300,100,&score31,NOTSRCERASE);
+          putimage(300,100,&score31,NOTSRCERASE);
 	  putimage(300,100,&score32,SRCINVERT);
 	}
-    if(count==4)
+        if(count==4)
 	{
-      putimage(300,100,&score41,NOTSRCERASE);
+          putimage(300,100,&score41,NOTSRCERASE);
 	  putimage(300,100,&score42,SRCINVERT);
 	}
-    if(count==5)
+        if(count==5)
 	{
-      putimage(300,100,&score51,NOTSRCERASE);
+          putimage(300,100,&score51,NOTSRCERASE);
 	  putimage(300,100,&score52,SRCINVERT);
 	}
-    if(count==6)
+        if(count==6)
 	{
-      putimage(300,100,&score61,NOTSRCERASE);
+          putimage(300,100,&score61,NOTSRCERASE);
 	  putimage(300,100,&score62,SRCINVERT);
 	}
-    if(count==7)
+        if(count==7)
 	{
-      putimage(300,100,&score71,NOTSRCERASE);
+          putimage(300,100,&score71,NOTSRCERASE);
 	  putimage(300,100,&score72,SRCINVERT);
 	}
-    if(count==8)
+        if(count==8)
 	{
-      putimage(300,100,&score81,NOTSRCERASE);
+          putimage(300,100,&score81,NOTSRCERASE);
 	  putimage(300,100,&score82,SRCINVERT);
 	}
-    if(count==9)
+        if(count==9)
 	{
-      putimage(300,100,&score91,NOTSRCERASE);
+          putimage(300,100,&score91,NOTSRCERASE);
 	  putimage(300,100,&score92,SRCINVERT);
 	}
-    if(flag==1)
-	{
-     putimage(birdx,birdy,&birdfail1,NOTSRCERASE);
-     putimage(birdx,birdy,&birdfail2,SRCINVERT);
-     putimage(79,280,&gameover1,NOTSRCERASE);
-     putimage(79,280,&gameover2,SRCINVERT);
-	 EndBatchDraw();                              //½áÊøÅúÁ¿»æÍ¼//
-     mciSendString("close bkmusic",NULL,0,NULL);  //Ğ¡ÄñËÀÍö£¬ÓÎÏ·½áÊø£¬¹Ø±ÕÒôÀÖ//
-	 system("pause"); 
-	 closegraph();
-	}
-	if(flag!=1)
-	{
-	putimage(birdx,birdy,&bird2,NOTSRCERASE);
-	putimage(birdx,birdy,&bird1,SRCINVERT);
-	}
-	FlushBatchDraw();                     //ÓÃÓÚÅúÁ¿»æÍ¼//
+        if(flag==1)
+        {
+         putimage(birdx,birdy,&birdfail1,NOTSRCERASE);
+         putimage(birdx,birdy,&birdfail2,SRCINVERT);
+         putimage(79,280,&gameover1,NOTSRCERASE);
+         putimage(79,280,&gameover2,SRCINVERT);
+         EndBatchDraw();                              //ç»“æŸæ‰¹é‡ç»˜å›¾//
+         mciSendString("close bkmusic",NULL,0,NULL);  //å°é¸Ÿæ­»äº¡ï¼Œæ¸¸æˆç»“æŸï¼Œå…³é—­éŸ³ä¹//
+         system("pause"); 
+         closegraph();
+        }
+        if(flag!=1)
+        {
+	  putimage(birdx,birdy,&bird2,NOTSRCERASE);
+	  putimage(birdx,birdy,&bird1,SRCINVERT);
+        }
+	FlushBatchDraw();                     //ç”¨äºæ‰¹é‡ç»˜å›¾//
 }
-void updatewithoutinput()                 //Ã»ÓĞÓÃ»§ÊäÈëÊ±£¬¸üĞÂ²ÎÊı£¬¸ü¸ÄÖù×ÓµÄÎ»ÖÃ//
+void updatewithoutinput()                 //æ²¡æœ‰ç”¨æˆ·è¾“å…¥æ—¶ï¼Œæ›´æ–°å‚æ•°ï¼Œæ›´æ”¹æŸ±å­çš„ä½ç½®//
 {
 	
 	srand(time(NULL));
@@ -152,7 +152,7 @@ void updatewithoutinput()                 //Ã»ÓĞÓÃ»§ÊäÈëÊ±£¬¸üĞÂ²ÎÊı£¬¸ü¸ÄÖù×ÓµÄ
 	if(barrierx<=(-140))
 	{
 	barrierx=350;
-    barrierdown=temp-425;
+        barrierdown=temp-425;
 	barriertop=temp+280;
 	}
 	if(birdx==(barrierx+140)&&(birdy>barrierdown+600)&&(birdy<barriertop))
@@ -162,40 +162,40 @@ void updatewithoutinput()                 //Ã»ÓĞÓÃ»§ÊäÈëÊ±£¬¸üĞÂ²ÎÊı£¬¸ü¸ÄÖù×ÓµÄ
 	if(((birdx>=(barrierx-20))&&(birdx<=barrierx+140))&&((birdy>=barriertop-10)||(birdy<=barrierdown+625)))
 	{
 		birdy=birdy-20;
-		flag=1;                                 //ÅĞ¶ÏĞ¡ÄñÊÇ·ñÍ¨¹ıÁËÖù×Ó//
+		flag=1;                                 //åˆ¤æ–­å°é¸Ÿæ˜¯å¦é€šè¿‡äº†æŸ±å­//
 	}
 	Sleep(135);
 }
 void updatewithinput()
 {
 	char ch;
-	if(kbhit())
+    if(kbhit())
+    {
+	ch=getch();
+	if(ch==' ')         //å½“ç©å®¶æŒ‰ä¸‹ç©ºæ ¼åï¼Œè®©å°é¸Ÿè·³è·ƒ//
 	{
-		ch=getch();
-		if(ch==' ')         //µ±Íæ¼Ò°´ÏÂ¿Õ¸ñºó£¬ÈÃĞ¡ÄñÌøÔ¾//
-		{
-			birdy=birdy-50;
-            mciSendString("close jpmusic",NULL,0,NULL);                               //²¥·ÅĞ¡ÄñÌøÔ¾Ê±µÄÒôÀÖ//
+            birdy=birdy-50;
+            mciSendString("close jpmusic",NULL,0,NULL);                               //æ’­æ”¾å°é¸Ÿè·³è·ƒæ—¶çš„éŸ³ä¹//
             mciSendString("open D:\\flappybird\\jump.mp3 alias jpmusic",NULL,0,NULL);
             mciSendString("play jpmusic",NULL,0,NULL);
-		}
 	}
+    }
 
 }
 void main()
 {
 	 
    
-    mciSendString("open D:\\flappybird\\background.mp3 alias bkmusic",NULL,0,NULL);  //²¥·Å±³¾°ÒôÀÖ//
+        mciSendString("open D:\\flappybird\\background.mp3 alias bkmusic",NULL,0,NULL);  //æ’­æ”¾èƒŒæ™¯éŸ³ä¹//
 	mciSendString("play bkmusic repeat",NULL,0,NULL);
 	startup();
-	while(1)
-	{
+  while(1)
+  {
 	show();
 	updatewithoutinput();
-	if(flag!=1)                         //µ±Ğ¡ÄñÃ»ÓĞÍ¨¹ıÖù×Ó£¬ÓÃ»§µÄÊäÈëÎŞĞ§//
+	if(flag!=1)                         //å½“å°é¸Ÿæ²¡æœ‰é€šè¿‡æŸ±å­ï¼Œç”¨æˆ·çš„è¾“å…¥æ— æ•ˆ//
 	{
 	updatewithinput();
 	}
-	}
+   }
 }
